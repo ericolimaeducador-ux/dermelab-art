@@ -1,0 +1,51 @@
+/* Newsreader = register "arte" (serifa editorial, usar sempre em itálico no display) */
+/* Jost = wordmark (geométrica leve, mesma família visual do logotipo oficial) */
+/* IBM Plex Mono = register "laboratório" (specs, método, lote) */
+@import url('https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@1,14..32,400;1,14..32,500&family=Jost:wght@400;500&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  /* ver DESIGN.md §1 — não adicionar cor nova sem atualizar o DESIGN.md primeiro */
+  --graphite-950: #1b1b1b;
+  --graphite-700: #3a3a38;
+  --lab-50: #f7f5f2;
+  --glassline: #d7ded8;
+  --glass-sage: #7c9683;
+  --pigment-red: #761520; /* cor real da arte oficial — único acento quente, preço/CTA, nunca decoração */
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  @apply bg-lab-50 text-graphite-950 font-body antialiased;
+}
+
+/* foco visível sempre — WCAG, público inclui uso em ambiente de estúdio/luva */
+:focus-visible {
+  outline: 2px solid var(--glass-sage);
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* register "arte" — usar font-display sempre em itálico (é a assinatura tipográfica
+   da dualidade ciência x arte, não um detalhe opcional) */
+.font-display {
+  font-style: italic;
+}
+
+.price {
+  color: var(--pigment-red);
+}

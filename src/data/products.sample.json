@@ -1,0 +1,94 @@
+{
+  "_note": "TODO(data): produto, preço e specs abaixo são placeholders de layout, não dados reais (exceto a imagem do Kit Pele Rara, que já usa um still real do vídeo de marca science-reveal.mp4 — ainda não é foto do produto/embalagem real). Os demais produtos usam /products/placeholder*.svg — arte neutra de marca até haver foto real. Substituir por catálogo real (ideal: migrar para CMS headless, ver CLAUDE.md) antes de publicar. Nunca inventar registro sanitário/ANVISA — deixar campo 'regulatory' como null até confirmação. Escopo atual: SOMENTE linha de cuidado/cicatrização (decisão do Erico) — produtos de suprimento geral (agulha, máquina) removidos.",
+  "items": [
+    {
+      "slug": "pele-rara-kit",
+      "name": "Kit Pele Rara",
+      "category": "kits-completos",
+      "flagship": true,
+      "price": 0,
+      "currency": "BRL",
+      "image": "/brand/pele-rara-still.jpg",
+      "imagePortrait": "/brand/pele-rara-still.jpg",
+      "shortDescription": "Protocolo completo de cuidado para a janela de cicatrização — da sessão à alta.",
+      "specs": [
+        {
+          "label": "Etapas",
+          "value": "TODO(data): confirmar composição real do kit"
+        },
+        {
+          "label": "Indicação",
+          "value": "Cuidado pós-procedimento"
+        },
+        {
+          "label": "Uso",
+          "value": "TODO(data): frequência/protocolo a validar com Consultor Clínico"
+        }
+      ],
+      "regulatory": null
+    },
+    {
+      "slug": "sabonete-limpeza-pre-sessao",
+      "name": "Sabonete de Limpeza Pré-Sessão",
+      "category": "limpeza-preparo",
+      "price": 0,
+      "currency": "BRL",
+      "image": "/products/placeholder.svg",
+      "imagePortrait": "/products/placeholder-portrait.svg",
+      "shortDescription": "Higienização da área antes do procedimento.",
+      "specs": [
+        {
+          "label": "Uso",
+          "value": "TODO(data): protocolo pré-sessão a validar"
+        },
+        {
+          "label": "pH",
+          "value": "TODO(data): confirmar com fornecedor"
+        }
+      ],
+      "regulatory": null
+    },
+    {
+      "slug": "pomada-barreira-pos-tattoo",
+      "name": "Pomada Barreira Pós-Tattoo",
+      "category": "cicatrizacao-ativa",
+      "price": 0,
+      "currency": "BRL",
+      "image": "/products/placeholder.svg",
+      "imagePortrait": "/products/placeholder-portrait.svg",
+      "shortDescription": "Proteção da área nos primeiros dias após o procedimento.",
+      "specs": [
+        {
+          "label": "Fase de uso",
+          "value": "TODO(data): janela de dias a validar com Consultor Clínico"
+        },
+        {
+          "label": "Textura",
+          "value": "TODO(data): confirmar com fornecedor"
+        }
+      ],
+      "regulatory": null
+    },
+    {
+      "slug": "hidratante-manutencao-cor",
+      "name": "Hidratante de Manutenção",
+      "category": "hidratacao-manutencao",
+      "price": 0,
+      "currency": "BRL",
+      "image": "/products/placeholder.svg",
+      "imagePortrait": "/products/placeholder-portrait.svg",
+      "shortDescription": "Cuidado contínuo da pele tatuada após a cicatrização completa.",
+      "specs": [
+        {
+          "label": "Fase de uso",
+          "value": "TODO(data): pós-alta, uso contínuo — validar recorrência"
+        },
+        {
+          "label": "Textura",
+          "value": "TODO(data): confirmar com fornecedor"
+        }
+      ],
+      "regulatory": null
+    }
+  ]
+}

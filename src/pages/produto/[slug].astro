@@ -1,0 +1,60 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import SpecTable from '../../components/SpecTable.astro';
+import productsData from '../../data/products.sample.json';
+
+export function getStaticPaths() {
+  return productsData.items.map((p) => ({
+    params: { slug: p.slug },
+    props: { product: p },
+  }));
+}
+
+const { product } = Astro.props;
+
+const formattedPrice = new Intl.NumberFormat('pt-BR', {
+  style: 'currency',
+  currency: product.currency,
+}).format(product.price);
+---
+
+<BaseLayout title={product.name} description={product.shortDescription}>
+  <section class="pt-24 px-6 grid gap-10 lg:grid-cols-2 lg:gap-16 max-w-6xl mx-auto">
+    <!-- Coluna de imagem — sticky no desktop (mesma lógica de scroll-telling do PDP do OmniaCare) -->
+    <div class="lg:sticky lg:top-24 h-fit">
+      <img
+        src={product.image}
+        alt={product.name}
+        class="w-full aspect-[4/3] object-cover bg-graphite-700"
+      />
+    </div>
+
+    <div>
+      <h1 class="font-display text-4xl">{product.name}</h1>
+      <p class="price font-mono text-2xl mt-3">
+        {product.price > 0 ? formattedPrice : 'Sob consulta — fale com o time comercial'}
+      </p>
+      <p class="font-body text-base text-graphite-700/80 mt-4 max-w-prose">
+        {product.shortDescription}
+      </p>
+
+      <!-- Sem carrinho/checkout ainda (ver CLAUDE.md backlog 1–2). Até lá o CTA
+           encaminha para o time comercial — coerente com o preço "sob consulta". -->
+      <a
+        href="/contato"
+        class="mt-8 inline-block w-full sm:w-auto text-center font-body text-sm bg-graphite-950 text-lab-50 px-6 py-3 hover:bg-pigment-red transition-colors"
+      >
+        Consultar com o time comercial
+      </a>
+
+      <h2 class="font-display text-xl mt-12 mb-3">Especificações</h2>
+      <SpecTable specs={product.specs} />
+
+      {product.regulatory === null && (
+        <p class="font-mono text-xs text-graphite-700/60 mt-4">
+          [PENDENTE — registro sanitário/procedência a confirmar antes da publicação]
+        </p>
+      )}
+    </div>
+  </section>
+</BaseLayout>

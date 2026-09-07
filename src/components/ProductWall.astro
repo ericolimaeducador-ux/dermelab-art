@@ -1,0 +1,19 @@
+---
+import ProductCard from './ProductCard.astro';
+import productsData from '../data/products.sample.json';
+
+const products = productsData.items;
+---
+
+<section class="grid grid-cols-2 sm:grid-cols-4 gap-1 bg-graphite-950">
+  {products.map((p, i) => (
+    <ProductCard
+      slug={p.slug}
+      name={p.name}
+      price={p.price}
+      currency={p.currency}
+      image={p.image}
+      portrait={i % 3 === 1}
+    />
+  ))}
+</section>

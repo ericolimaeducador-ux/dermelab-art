@@ -1,0 +1,50 @@
+---
+import categoriesData from '../data/categories.json';
+const categories = categoriesData.items;
+
+const primaryNav = [
+  { label: 'Loja', href: '/loja' },
+  { label: 'Sobre', href: '/sobre' },
+  { label: 'Contato', href: '/contato' },
+];
+---
+
+<div
+  id="menu-overlay"
+  class="fixed inset-0 z-30 bg-graphite-950 text-lab-50 translate-y-[-100%] transition-transform duration-500 ease-out overflow-y-auto"
+>
+  <div class="min-h-screen px-6 pt-28 pb-16 flex flex-col justify-between gap-16">
+    <nav class="grid gap-12 sm:grid-cols-2">
+      <ul class="space-y-4">
+        {primaryNav.map((item) => (
+          <li>
+            <a href={item.href} class="font-display text-4xl sm:text-5xl leading-none hover:text-glass-sage transition-colors">
+              {item.label}
+            </a>
+          </li>
+        ))}
+      </ul>
+
+      <ul class="space-y-3 border-t border-graphite-700 pt-6 sm:border-t-0 sm:pt-0">
+        {categories.map((cat) => (
+          <li>
+            <a href={`/loja/${cat.slug}`} class="flex items-baseline justify-between gap-4 font-body text-lg hover:text-glass-sage transition-colors">
+              <span>{cat.name}</span>
+              <span class="text-sm text-glassline">→</span>
+            </a>
+          </li>
+        ))}
+      </ul>
+    </nav>
+
+    <footer class="text-sm text-glassline space-y-1">
+      <p>Atacado e lojistas: <a href="/contato" class="underline hover:text-lab-50">fale com a gente</a></p>
+    </footer>
+  </div>
+</div>
+
+<style>
+  #menu-overlay.is-open {
+    transform: translateY(0);
+  }
+</style>

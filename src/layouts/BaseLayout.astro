@@ -1,0 +1,49 @@
+---
+import Header from '../components/Header.astro';
+import MenuOverlay from '../components/MenuOverlay.astro';
+import Footer from '../components/Footer.astro';
+import site from '../data/site.json';
+import '../styles/global.css';
+
+interface Props {
+  title: string;
+  description?: string;
+}
+
+const { title, description = site.tagline } = Astro.props;
+
+// URL canônica e imagem OG absoluta (precisam de host completo — Astro.site vem do astro.config).
+const canonical = new URL(Astro.url.pathname, Astro.site).href;
+const ogImage = new URL('/brand/dermelab-art-mark.png', Astro.site).href;
+---
+
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/png" href="/brand/favicon-256.png" />
+    <link rel="apple-touch-icon" href="/brand/favicon-256.png" />
+    <link rel="canonical" href={canonical} />
+    <title>{title} · {site.fullName}</title>
+    <meta name="description" content={description} />
+    <meta property="og:site_name" content={site.fullName} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:type" content="website" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImage} />
+  </head>
+  <body>
+    <Header />
+    <MenuOverlay />
+    <main>
+      <slot />
+    </main>
+    <Footer />
+  </body>
+</html>

@@ -1,0 +1,34 @@
+---
+// Asset real da marca: soro penetrando a pele, camada celular, até revelar o mesmo
+// ornamento floral vinho do logotipo, tatuado. É a dramatização literal do slogan —
+// por isso essa seção fica logo após o Hero, antes do Método (mostra, depois explica).
+// Nota de governança: o vídeo tem legendas em inglês ("HYDRATION") já embutidas no
+// pixel — não dá pra localizar sem reeditar o vídeo-fonte. Ver TODO(media) no CLAUDE.md.
+---
+
+<section class="relative h-[85vh] w-full overflow-hidden bg-lab-50">
+  <video
+    class="absolute inset-0 h-full w-full object-cover"
+    autoplay
+    muted
+    loop
+    playsinline
+    poster="/brand/science-reveal-poster.jpg"
+  >
+    <source src="/brand/science-reveal.mp4" type="video/mp4" />
+  </video>
+
+  <div class="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-graphite-950/80 via-graphite-950/20 to-transparent"></div>
+
+  <div class="relative z-10 h-full flex flex-col justify-end px-6 pb-14 text-lab-50">
+    <p class="font-mono text-xs text-glass-sage mb-2">Método → resultado</p>
+    <p class="font-display text-3xl sm:text-4xl max-w-lg">
+      A ciência penetra. A arte permanece.
+    </p>
+    <p class="font-mono text-xs text-lab-50/60 mt-4 max-w-prose">
+      [PENDENTE — qualquer leitura de eficácia (hidratação, penetração, fixação de cor)
+      sugerida por esta cena é ilustrativa e precisa de validação por profissional
+      habilitado antes de virar claim publicada.]
+    </p>
+  </div>
+</section>

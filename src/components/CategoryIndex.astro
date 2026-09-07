@@ -1,0 +1,23 @@
+---
+import categoriesData from '../data/categories.json';
+const categories = categoriesData.items;
+---
+
+<section class="bg-lab-50 text-graphite-950 px-6 py-16">
+  <h2 class="font-display text-2xl mb-8">Categorias</h2>
+  <ul>
+    {categories.map((cat) => (
+      <li class="border-t border-glassline last:border-b">
+        <a
+          href={`/loja/${cat.slug}`}
+          class="group flex items-baseline justify-between gap-4 py-5 font-display text-2xl sm:text-4xl leading-none hover:text-glass-sage transition-colors"
+        >
+          <span>{cat.name}</span>
+          <span class="font-mono text-xs sm:text-sm text-glassline group-hover:text-glass-sage whitespace-nowrap">
+            {cat.count > 0 ? `${cat.count} itens` : 'em breve'} →
+          </span>
+        </a>
+      </li>
+    ))}
+  </ul>
+</section>

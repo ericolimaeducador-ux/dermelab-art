@@ -1,0 +1,17 @@
+---
+// Réplica fiel do lockup oficial em texto (ver public/brand/dermelab-art-mark.png):
+// "DERMELAB" + ponto vermelho (o único pigmento) + "ART". Nunca reescrever como
+// "Derme.Lab" — esse nome foi substituído pela marca real entregue pelo Erico.
+interface Props {
+  size?: 'sm' | 'lg';
+}
+const { size = 'sm' } = Astro.props;
+const textClass = size === 'lg' ? 'text-3xl sm:text-4xl' : 'text-lg';
+const dotClass = size === 'lg' ? 'w-2.5 h-2.5 mx-2' : 'w-1.5 h-1.5 mx-1.5';
+---
+
+<span class:list={['font-wordmark inline-flex items-center leading-none', textClass]}>
+  <span>DERMELAB</span>
+  <span class:list={['inline-block rounded-full bg-pigment-red', dotClass]} aria-hidden="true"></span>
+  <span>ART</span>
+</span>

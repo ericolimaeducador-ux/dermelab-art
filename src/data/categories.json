@@ -1,0 +1,9 @@
+{
+  "_note": "TODO(data): 'count' é placeholder ilustrativo para o layout. Substituir pela contagem real de SKUs assim que o catálogo existir — nunca publicar número inventado. Escopo atual (decisão do Erico): SOMENTE a linha de cuidado/cicatrização. Categorias de suprimento geral (agulhas, máquinas, tintas, EPI) foram removidas daqui — voltam quando o escopo for ampliado, ver CLAUDE.md.",
+  "items": [
+    { "slug": "kits-completos", "name": "Kits completos", "count": 0 },
+    { "slug": "limpeza-preparo", "name": "Limpeza & Preparo", "count": 0 },
+    { "slug": "cicatrizacao-ativa", "name": "Cicatrização ativa", "count": 0 },
+    { "slug": "hidratacao-manutencao", "name": "Hidratação & Manutenção", "count": 0 }
+  ]
+}

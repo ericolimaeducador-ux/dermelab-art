@@ -1,0 +1,35 @@
+---
+import Wordmark from './Wordmark.astro';
+---
+
+<header class="fixed top-0 left-0 right-0 z-40 flex items-center justify-between px-6 py-4 bg-graphite-950/85 backdrop-blur-sm text-lab-50">
+  <a href="/" aria-label="Dermelab · Art — início">
+    <Wordmark />
+  </a>
+
+  <!-- Carrinho/checkout ainda não implementado (ver CLAUDE.md backlog 1–2).
+       Enquanto isso o header não exibe link de carrinho — a conversão passa
+       pelo time comercial (CTA nas páginas de produto). -->
+  <button
+    id="menu-toggle"
+    type="button"
+    class="font-body text-sm flex items-center gap-2"
+    aria-expanded="false"
+    aria-controls="menu-overlay"
+  >
+    <span id="menu-toggle-label">Menu</span>
+  </button>
+</header>
+
+<script>
+  const toggle = document.getElementById('menu-toggle');
+  const label = document.getElementById('menu-toggle-label');
+  const overlay = document.getElementById('menu-overlay');
+
+  toggle?.addEventListener('click', () => {
+    const isOpen = overlay?.classList.toggle('is-open');
+    toggle.setAttribute('aria-expanded', String(!!isOpen));
+    if (label) label.textContent = isOpen ? 'Fechar' : 'Menu';
+    document.body.classList.toggle('overflow-hidden', !!isOpen);
+  });
+</script>

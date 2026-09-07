@@ -1,0 +1,36 @@
+---
+interface Props {
+  slug: string;
+  name: string;
+  price: number;
+  currency?: string;
+  image: string;
+  portrait?: boolean;
+}
+
+const { slug, name, price, currency = 'BRL', image, portrait = false } = Astro.props;
+
+const formattedPrice = new Intl.NumberFormat('pt-BR', {
+  style: 'currency',
+  currency,
+}).format(price);
+---
+
+<a
+  href={`/produto/${slug}`}
+  class:list={[
+    'group relative block overflow-hidden bg-graphite-700',
+    portrait ? 'aspect-[3/4]' : 'aspect-[4/3]',
+  ]}
+>
+  <img
+    src={image}
+    alt={name}
+    loading="lazy"
+    class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+  />
+  <div class="absolute inset-x-0 bottom-0 flex items-end justify-between gap-4 bg-gradient-to-t from-graphite-950/90 to-transparent p-4 text-lab-50 opacity-0 group-hover:opacity-100 transition-opacity">
+    <span class="font-body text-sm">{name}</span>
+    <span class="price font-mono text-sm whitespace-nowrap">{price > 0 ? formattedPrice : 'sob consulta'}</span>
+  </div>
+</a>

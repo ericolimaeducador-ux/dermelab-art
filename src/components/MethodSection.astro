@@ -1,0 +1,41 @@
+---
+// Registro "laboratório": linguagem de método, não de promessa. Toda claim aqui precisa
+// ser compatível com evidência real — nunca prometer cura/eliminação, sempre finalidade.
+// Ver princípio de veto clínico no DESIGN.md §4 antes de editar este copy.
+const steps = [
+  {
+    label: 'Compreensão',
+    text: 'Como a pele se comporta durante e após a perfuração — camadas, resposta inflamatória, janela de cicatrização.',
+  },
+  {
+    label: 'Formulação',
+    text: 'Ativos selecionados pela função na barreira cutânea, com referência de evidência documentada por item.',
+  },
+  {
+    label: 'Aplicação',
+    text: 'Protocolo de uso pensado para a rotina do estúdio e do cliente — sem etapa desnecessária.',
+  },
+];
+---
+
+<section class="bg-lab-50 text-graphite-950 px-6 py-20 border-t border-glassline">
+  <p class="font-mono text-sm text-glass-sage mb-2">Método</p>
+  <h2 class="font-display text-3xl max-w-xl mb-12">
+    Antes de virar produto, vira estudo.
+  </h2>
+
+  <ol class="grid gap-10 sm:grid-cols-3">
+    {steps.map((step, i) => (
+      <li class="border-t border-glassline pt-4">
+        <p class="font-mono text-xs text-glass-sage mb-2">0{i + 1}</p>
+        <p class="font-body text-sm font-medium mb-1">{step.label}</p>
+        <p class="font-body text-sm text-graphite-700">{step.text}</p>
+      </li>
+    ))}
+  </ol>
+
+  <p class="font-mono text-xs text-graphite-700/60 mt-12 max-w-prose">
+    [PENDENTE — toda claim acima é rascunho sujeito a validação por profissional
+    habilitado e referência de evidência real, item a item, antes de publicação.]
+  </p>
+</section>

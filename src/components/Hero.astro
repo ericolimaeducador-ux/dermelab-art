@@ -1,0 +1,76 @@
+---
+import site from '../data/site.json';
+---
+
+<section class="relative h-[100svh] w-full overflow-hidden bg-lab-50">
+  <!--
+    Asset real da marca (entregue pelo Erico): animação de reveal do logotipo
+    Dermelab · Art. Fundo claro do próprio vídeo define o fundo da seção — por
+    isso o hero deixou de ser escuro (ver histórico no DESIGN.md §3).
+  -->
+  <video
+    id="hero-video"
+    class="absolute inset-0 h-full w-full object-cover"
+    autoplay
+    muted
+    loop
+    playsinline
+    poster="/brand/poster.jpg"
+  >
+    <source src="/brand/dermelab-art-hero.mp4" type="video/mp4" />
+  </video>
+
+  <!-- scrim de baixo pra cima só o suficiente pra garantir contraste do texto -->
+  <div class="absolute inset-x-0 bottom-0 h-2/3 bg-gradient-to-t from-lab-50 via-lab-50/75 to-transparent"></div>
+
+  <button
+    id="sound-toggle"
+    type="button"
+    class="absolute top-24 right-6 z-10 font-mono text-xs text-graphite-950 border border-graphite-950/30 px-3 py-1.5 hover:border-graphite-950 transition-colors"
+    aria-pressed="false"
+  >
+    Som: desligado
+  </button>
+
+  <div class="relative z-10 h-full flex flex-col justify-end px-6 pb-16 text-graphite-950">
+    <!--
+      O slogan é partido nos dois registros tipográficos do projeto de propósito:
+      registro "laboratório" (mono, contido) valida o produto; registro "arte"
+      (serifa itálica, grande) valida o cliente/tatuador. Ver DESIGN.md §2.
+      Nunca reunificar as duas partes na mesma fonte — é a assinatura da marca.
+    -->
+    <p class="font-mono text-sm text-glass-sage mb-3">A ciência do cuidado,</p>
+    <h1 class="font-display text-hero max-w-3xl">
+      a majestade da sua arte.
+    </h1>
+    <p class="mt-5 max-w-prose font-body text-base text-graphite-700">
+      {site.positioning}
+    </p>
+    <div class="mt-8 flex flex-wrap gap-4">
+      <a
+        href={`/produto/${site.flagshipProduct}`}
+        class="inline-flex w-fit items-center gap-2 font-body text-sm bg-pigment-red text-lab-50 px-5 py-3 hover:opacity-90 transition-opacity"
+      >
+        Conhecer o Kit Pele Rara
+      </a>
+      <a
+        href="/loja"
+        class="inline-flex w-fit items-center gap-2 font-body text-sm border border-graphite-950 px-5 py-3 hover:bg-graphite-950 hover:text-lab-50 transition-colors"
+      >
+        Ver catálogo
+      </a>
+    </div>
+  </div>
+</section>
+
+<script>
+  const video = document.getElementById('hero-video') as HTMLVideoElement | null;
+  const toggle = document.getElementById('sound-toggle');
+
+  toggle?.addEventListener('click', () => {
+    if (!video) return;
+    video.muted = !video.muted;
+    toggle.setAttribute('aria-pressed', String(!video.muted));
+    toggle.textContent = video.muted ? 'Som: desligado' : 'Som: ligado';
+  });
+</script>

@@ -1,0 +1,11 @@
+# Cloudflare Pages — cabeçalhos de cache.
+# Assets versionados pelo Astro (hash no nome) podem ser imutáveis.
+/_astro/*
+  Cache-Control: public, max-age=31536000, immutable
+
+# Mídia de marca (vídeo/imagem) — cache longo, revalida em 1 dia.
+/brand/*
+  Cache-Control: public, max-age=86400, stale-while-revalidate=604800
+
+/products/*
+  Cache-Control: public, max-age=86400, stale-while-revalidate=604800
