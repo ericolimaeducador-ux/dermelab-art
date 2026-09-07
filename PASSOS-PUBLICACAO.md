@@ -1,49 +1,41 @@
 # Publicação — Dermelab · Art
 
-Tudo o que falta para o site ficar no ar em `https://dermelab.art`.
-O código já builda limpo (`npm run build`) e está pronto para deploy estático.
+Guia de publicação do site em `https://dermelab.art` via **GitHub Pages** (com GitHub Actions).
+O código builda limpo (`npm run build`) e o workflow de CI/CD já está configurado em `.github/workflows/deploy.yml`.
 
 ---
 
-## 1. Conectar o repositório à Cloudflare Pages
+## 1. Ativar o GitHub Pages no Repositório
 
-1. Entre em https://dash.cloudflare.com → **Workers & Pages** → **Create** → **Pages** → **Connect to Git**.
-2. Autorize o GitHub e escolha o repositório **`dermelab-art`**.
-3. Configuração de build:
+1. Acesse o repositório no GitHub: **https://github.com/ericolimaeducador-ux/dermelab-art**
+2. Vá em **Settings** (Configurações) → **Pages** (no menu lateral esquerdo).
+3. Na seção **Build and deployment**:
+   - **Source**: Selecione **`GitHub Actions`** (em vez de *Deploy from a branch*).
+4. Assim que você fizer `git push` na branch `main`, a Action **Deploy to GitHub Pages** rodará automaticamente e fará o build e publicação.
 
-   | Campo | Valor |
-   |---|---|
-   | Production branch | `main` |
-   | Framework preset | `Astro` |
-   | Build command | `npm run build` |
-   | Build output directory | `dist` |
-   | Root directory | *(vazio — o projeto está na raiz do repo)* |
-   | Variáveis de ambiente | nenhuma necessária |
+---
 
-4. **Save and Deploy**. O primeiro build sai em ~1–2 min e o site fica em
-   `https://dermelab-art.pages.dev`.
-5. A cada `git push` na `main` a Cloudflare rebuilda e publica sozinha. Pull requests
-   ganham preview URL automática.
+## 2. Configurar o Domínio Personalizado (`dermelab.art`)
 
-## 2. Ligar o domínio `dermelab.art`
+O arquivo `public/CNAME` já está configurado com `dermelab.art`.
 
-### Se o domínio for registrado/transferido para a Cloudflare (recomendado)
-1. Dash → **Websites** → **Add a site** → `dermelab.art` → siga o registro/transferência.
-2. Em **Workers & Pages → dermelab-art → Custom domains → Set up a custom domain**,
-   adicione `dermelab.art` e `www.dermelab.art`. Os registros DNS são criados sozinhos.
+### Configuração de DNS no seu provedor de domínio:
+Adicione os seguintes registros DNS:
 
-### Se o domínio ficar em outro registrador
-Crie no DNS do registrador:
+1. **Registros A (para o domínio raiz `dermelab.art` apontando para o GitHub Pages)**:
+   - `185.199.108.153`
+   - `185.199.109.153`
+   - `185.199.110.153`
+   - `185.199.111.153`
 
-| Tipo | Nome | Valor |
-|---|---|---|
-| CNAME | `@` (ou `dermelab.art`) | `dermelab-art.pages.dev` |
-| CNAME | `www` | `dermelab-art.pages.dev` |
+2. **Registro CNAME (para o subdomínio `www`)**:
+   - **Nome / Host**: `www`
+   - **Tipo**: `CNAME`
+   - **Valor / Destino**: `ericolimaeducador-ux.github.io.`
 
-> `.art` é um TLD comum; a maioria dos registradores aceita CNAME na raiz (CNAME flattening).
-> Se o seu não aceitar, registre o domínio na Cloudflare para resolver isso.
-
-O HTTPS/SSL é emitido automático pela Cloudflare depois que o DNS propaga (minutos a 1h).
+3. **No GitHub (Settings → Pages → Custom domain)**:
+   - Digite `dermelab.art` e clique em **Save**.
+   - Marque a opção **Enforce HTTPS** (o certificado SSL gratuito do GitHub é gerado em poucos minutos após a propagação do DNS).
 
 ## 3. Verificações pós-publicação
 
