@@ -3,21 +3,35 @@ import categoriesData from '../data/categories.json';
 const categories = categoriesData.items;
 ---
 
-<section class="bg-lab-50 text-graphite-950 px-6 py-16">
-  <h2 class="font-display text-2xl mb-8">Categorias</h2>
-  <ul>
-    {categories.map((cat) => (
-      <li class="border-t border-glassline last:border-b">
-        <a
-          href={`/loja/${cat.slug}`}
-          class="group flex items-baseline justify-between gap-4 py-5 font-display text-2xl sm:text-4xl leading-none hover:text-glass-sage transition-colors"
-        >
-          <span>{cat.name}</span>
-          <span class="font-mono text-xs sm:text-sm text-glassline group-hover:text-glass-sage whitespace-nowrap">
-            {cat.count > 0 ? `${cat.count} itens` : 'em breve'} →
-          </span>
-        </a>
-      </li>
-    ))}
-  </ul>
+<section class="bg-graphite-900 text-lab-50 px-6 sm:px-12 py-24 border-t border-white/10">
+  <div class="max-w-7xl mx-auto">
+    <div class="flex items-baseline justify-between mb-12 border-b border-white/10 pb-4">
+      <h2 class="font-display text-3xl sm:text-4xl">Categorias em Destaque</h2>
+      <a href="/loja" class="font-mono text-xs text-glass-sage hover:text-white transition-colors uppercase tracking-wider">
+        Ver Catálogo Completo →
+      </a>
+    </div>
+
+    <ul>
+      {categories.map((cat, idx) => (
+        <li class="border-b border-white/10">
+          <a
+            href={`/loja/${cat.slug}`}
+            class="group flex items-baseline justify-between py-6 sm:py-8 transition-colors hover:text-glass-sage"
+          >
+            <div class="flex items-baseline gap-6 sm:gap-10">
+              <span class="font-mono text-xs sm:text-sm text-white/40 group-hover:text-glass-sage">0{idx + 1}</span>
+              <span class="font-display text-2xl sm:text-4xl lg:text-5xl group-hover:translate-x-3 transition-transform">
+                {cat.name}
+              </span>
+            </div>
+            <span class="font-mono text-xs sm:text-sm text-white/50 group-hover:text-white flex items-center gap-2">
+              <span>Explorar</span>
+              <span class="text-glass-sage">→</span>
+            </span>
+          </a>
+        </li>
+      ))}
+    </ul>
+  </div>
 </section>

@@ -1,45 +1,164 @@
 ---
 import categoriesData from '../data/categories.json';
-const categories = categoriesData.items;
+import site from '../data/site.json';
 
-const primaryNav = [
-  { label: 'Loja', href: '/loja' },
-  { label: 'Sobre', href: '/sobre' },
-  { label: 'Contato', href: '/contato' },
+const projects = [
+  {
+    num: '01',
+    title: 'Kit Pele Rara',
+    subtitle: 'Protocolo completo de cicatrização',
+    year: '2026 — Flagship',
+    href: '/produto/pele-rara-kit',
+    image: '/brand/pele-rara-still.jpg',
+  },
+  {
+    num: '02',
+    title: 'Sabonete Limpeza Pré-Sessão',
+    subtitle: 'Higienização e preparo dérmico',
+    year: 'Preparo',
+    href: '/produto/sabonete-limpeza-pre-sessao',
+    image: '/products/1.png',
+  },
+  {
+    num: '03',
+    title: 'Pomada Barreira Pós-Tattoo',
+    subtitle: 'Proteção nos primeiros dias críticos',
+    year: 'Cicatrização',
+    href: '/produto/pomada-barreira-pos-tattoo',
+    image: '/products/2.png',
+  },
+  {
+    num: '04',
+    title: 'Hidratante de Manutenção',
+    subtitle: 'Preservação de cor e hidratação contínua',
+    year: 'Manutenção',
+    href: '/produto/hidratante-manutencao-cor',
+    image: '/products/3.png',
+  },
+  {
+    num: '05',
+    title: 'Filme de Revelação da Marca',
+    subtitle: 'Identidade visual e autoridade',
+    year: 'Identidade',
+    href: '/',
+    image: '/brand/poster.jpg',
+  },
+  {
+    num: '06',
+    title: 'Estudo de Penetração Celular',
+    subtitle: 'Dramatização de eficácia científica',
+    year: 'Método',
+    href: '/',
+    image: '/brand/science-reveal-poster.jpg',
+  },
 ];
+
+const categories = categoriesData.items;
 ---
 
 <div
   id="menu-overlay"
-  class="fixed inset-0 z-30 bg-graphite-950 text-lab-50 translate-y-[-100%] transition-transform duration-500 ease-out overflow-y-auto"
+  class="fixed inset-0 z-50 bg-graphite-950 text-lab-50 translate-y-[-100%] transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] overflow-y-auto"
 >
-  <div class="min-h-screen px-6 pt-28 pb-16 flex flex-col justify-between gap-16">
-    <nav class="grid gap-12 sm:grid-cols-2">
-      <ul class="space-y-4">
-        {primaryNav.map((item) => (
-          <li>
-            <a href={item.href} class="font-display text-4xl sm:text-5xl leading-none hover:text-glass-sage transition-colors">
-              {item.label}
-            </a>
-          </li>
-        ))}
-      </ul>
+  <div class="min-h-screen px-6 sm:px-12 pt-28 pb-16 flex flex-col justify-between max-w-7xl mx-auto">
+    <!-- Top Bar Title inside overlay -->
+    <div class="flex items-center justify-between border-b border-white/10 pb-6 mb-10">
+      <p class="font-mono text-xs text-glass-sage tracking-widest uppercase">
+        Índice Geral de Projetos & Produtos
+      </p>
+      <p class="font-mono text-xs text-white/40">
+        DERMELAB · ART STUDIO
+      </p>
+    </div>
 
-      <ul class="space-y-3 border-t border-graphite-700 pt-6 sm:border-t-0 sm:pt-0">
-        {categories.map((cat) => (
-          <li>
-            <a href={`/loja/${cat.slug}`} class="flex items-baseline justify-between gap-4 font-body text-lg hover:text-glass-sage transition-colors">
-              <span>{cat.name}</span>
-              <span class="text-sm text-glassline">→</span>
-            </a>
-          </li>
-        ))}
-      </ul>
-    </nav>
+    <!-- Main 2-Column Editorial Grid -->
+    <div class="grid lg:grid-cols-12 gap-12 lg:gap-16 items-start">
+      <!-- Left: Interactive Project List (7 cols) -->
+      <div class="lg:col-span-7">
+        <ul class="space-y-1">
+          {projects.map((item) => (
+            <li class="group">
+              <a
+                href={item.href}
+                class="menu-project-item flex items-baseline justify-between py-4 border-b border-white/10 hover:border-white/40 transition-colors"
+                data-preview={item.image}
+              >
+                <div class="flex items-baseline gap-4 sm:gap-6">
+                  <span class="font-mono text-xs text-glass-sage">{item.num}</span>
+                  <span class="font-display text-2xl sm:text-4xl text-lab-50 group-hover:text-glass-sage group-hover:translate-x-2 transition-all">
+                    {item.title}
+                  </span>
+                </div>
+                <span class="font-mono text-xs text-white/40 whitespace-nowrap ml-4">
+                  {item.year}
+                </span>
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
 
-    <footer class="text-sm text-glassline space-y-1">
-      <p>Atacado e lojistas: <a href="/contato" class="underline hover:text-lab-50">fale com a gente</a></p>
-    </footer>
+      <!-- Right: Floating Image Preview + Studio Info (5 cols) -->
+      <div class="lg:col-span-5 flex flex-col justify-between gap-10">
+        <!-- Floating Interactive Preview Frame -->
+        <div class="hidden lg:block relative aspect-[16/10] w-full bg-graphite-900 border border-white/10 overflow-hidden">
+          <img
+            id="menu-preview-img"
+            src="/brand/pele-rara-still.jpg"
+            alt="Preview do Projeto"
+            class="w-full h-full object-cover transition-opacity duration-300 opacity-90"
+          />
+          <div class="absolute inset-0 bg-gradient-to-t from-graphite-950/60 to-transparent"></div>
+          <span class="absolute bottom-3 left-4 font-mono text-[11px] text-white/70 tracking-wider">
+            PREVIEW DE PROJETO
+          </span>
+        </div>
+
+        <!-- Studio Manifesto & Method -->
+        <div class="space-y-6 pt-4 border-t border-white/10">
+          <div>
+            <p class="font-mono text-xs text-glass-sage mb-2">Posicionamento</p>
+            <p class="font-display text-xl sm:text-2xl text-lab-50 leading-snug">
+              {site.tagline}
+            </p>
+            <p class="font-body text-xs sm:text-sm text-white/60 mt-2 max-w-md">
+              {site.positioning}
+            </p>
+          </div>
+
+          <!-- Quick Navigation Links -->
+          <div class="grid grid-cols-2 gap-4 pt-4 border-t border-white/10 font-body text-sm">
+            <div>
+              <p class="font-mono text-[11px] text-glass-sage uppercase tracking-wider mb-2">Categorias</p>
+              <ul class="space-y-1.5 text-white/80">
+                {categories.map((cat) => (
+                  <li>
+                    <a href={`/loja/${cat.slug}`} class="hover:text-white transition-colors">
+                      {cat.name} →
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </div>
+            <div>
+              <p class="font-mono text-[11px] text-glass-sage uppercase tracking-wider mb-2">Páginas & Contato</p>
+              <ul class="space-y-1.5 text-white/80">
+                <li><a href="/loja" class="hover:text-white transition-colors">Catálogo / Loja →</a></li>
+                <li><a href="/sobre" class="hover:text-white transition-colors">Sobre o Laboratório →</a></li>
+                <li><a href="/contato" class="hover:text-white transition-colors">Atendimento & Atacado →</a></li>
+                <li><a href={site.whatsapp} target="_blank" rel="noopener" class="text-glass-sage hover:text-white transition-colors">WhatsApp Comercial ↗</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bottom Credits -->
+    <div class="mt-16 pt-6 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between text-xs font-mono text-white/40 gap-4">
+      <p>© 2026 Dermelab · Art. Todos os direitos reservados.</p>
+      <p>A ciência do cuidado, a majestade da sua arte.</p>
+    </div>
   </div>
 </div>
 
@@ -48,3 +167,21 @@ const primaryNav = [
     transform: translateY(0);
   }
 </style>
+
+<script>
+  const previewImg = document.getElementById('menu-preview-img') as HTMLImageElement | null;
+  const projectItems = document.querySelectorAll<HTMLElement>('.menu-project-item');
+
+  projectItems.forEach((item) => {
+    item.addEventListener('mouseenter', () => {
+      const previewSrc = item.getAttribute('data-preview');
+      if (previewImg && previewSrc) {
+        previewImg.style.opacity = '0.4';
+        setTimeout(() => {
+          previewImg.src = previewSrc;
+          previewImg.style.opacity = '0.9';
+        }, 120);
+      }
+    });
+  });
+</script>

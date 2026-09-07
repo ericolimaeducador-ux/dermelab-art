@@ -1,0 +1,282 @@
+---
+interface Slide {
+  id: string;
+  type: 'video' | 'image';
+  src: string;
+  poster?: string;
+  hasAudio?: boolean;
+  tag: string;
+  subtitle: string;
+  title: string;
+  ctaText?: string;
+  ctaHref?: string;
+  metaRight: string;
+  metaSub: string;
+}
+
+const slides: Slide[] = [
+  {
+    id: 'hero-reveal',
+    type: 'video',
+    src: '/brand/dermelab-art-hero.mp4',
+    poster: '/brand/poster.jpg',
+    hasAudio: true,
+    tag: '01 / IDENTIDADE OFICIAL',
+    subtitle: 'A ciência do cuidado,',
+    title: 'a majestade da sua arte.',
+    ctaText: 'Conhecer o Kit Pele Rara',
+    ctaHref: '/produto/pele-rara-kit',
+    metaRight: '2026 — OFFICIAL REVEAL',
+    metaSub: 'AUTORIDADE & ASSEPSIA',
+  },
+  {
+    id: 'science-reveal',
+    type: 'video',
+    src: '/brand/science-reveal.mp4',
+    poster: '/brand/science-reveal-poster.jpg',
+    hasAudio: false,
+    tag: '02 / MÉTODO → RESULTADO',
+    subtitle: 'Penetração nas camadas da derme',
+    title: 'A ciência penetra. A arte permanece.',
+    ctaText: 'Ver Linha de Cuidado',
+    ctaHref: '/loja',
+    metaRight: 'ESTUDO CELULAR',
+    metaSub: '01 COMPREENSÃO · 02 FORMULAÇÃO',
+  },
+  {
+    id: 'pele-rara',
+    type: 'image',
+    src: '/brand/pele-rara-still.jpg',
+    tag: '03 / CARRO-CHEFE',
+    subtitle: 'Protocolo completo de cicatrização',
+    title: 'Kit Pele Rara',
+    ctaText: 'Ver Detalhes do Kit →',
+    ctaHref: '/produto/pele-rara-kit',
+    metaRight: 'SOB CONSULTA',
+    metaSub: 'ATACADO & ESTÚDIOS',
+  },
+  {
+    id: 'preparo',
+    type: 'image',
+    src: '/products/1.png',
+    tag: '04 / LIMPEZA & PREPARO',
+    subtitle: 'Higienização e preservação do traço',
+    title: 'Assepsia que protege o pigmento.',
+    ctaText: 'Sabonete Pré-Sessão →',
+    ctaHref: '/produto/sabonete-limpeza-pre-sessao',
+    metaRight: 'FASE PRÉ-SESSÃO',
+    metaSub: 'FORMULAÇÃO CLÍNICA',
+  },
+  {
+    id: 'longevidade',
+    type: 'image',
+    src: '/products/2.png',
+    tag: '05 / CICATRIZAÇÃO & MANUTENÇÃO',
+    subtitle: 'Barreira lipídica e hidratação',
+    title: 'A longevidade da sua tatuagem.',
+    ctaText: 'Explorar Catálogo Completo →',
+    ctaHref: '/loja',
+    metaRight: 'LINHA COMPLETA',
+    metaSub: 'DERMELAB · ART',
+  },
+];
+---
+
+<section
+  id="slideshow-container"
+  class="relative h-[100dvh] w-full overflow-hidden bg-graphite-950 select-none"
+  aria-label="Galeria de Slides Dermelab Art"
+>
+  <!-- Slides Canvas -->
+  {slides.map((slide, index) => (
+    <div
+      class:list={[
+        'slide-item absolute inset-0 h-full w-full',
+        index === 0 ? 'is-active' : 'is-hidden',
+      ]}
+      data-index={index}
+      data-has-audio={slide.hasAudio ? 'true' : 'false'}
+    >
+      {slide.type === 'video' ? (
+        <video
+          class="slide-video absolute inset-0 h-full w-full object-cover"
+          autoplay
+          muted
+          loop
+          playsinline
+          poster={slide.poster}
+          preload="auto"
+        >
+          <source src={slide.src} type="video/mp4" />
+        </video>
+      ) : (
+        <img
+          src={slide.src}
+          alt={slide.title}
+          class="absolute inset-0 h-full w-full object-cover"
+          loading={index === 0 ? 'eager' : 'lazy'}
+        />
+      )}
+
+      <!-- Scrim sutil cinematográfico nos cantos (preserva 100% da imagem no centro) -->
+      <div class="absolute inset-0 bg-gradient-to-t from-graphite-950/80 via-transparent to-graphite-950/30 pointer-events-none"></div>
+
+      <!-- Slide Content Overlay (Cantos estilo Smorgasbord) -->
+      <div class="absolute inset-0 pointer-events-none flex flex-col justify-between p-6 sm:p-10 pt-24 sm:pt-28">
+        <!-- Top Tag / Category -->
+        <div class="flex items-center justify-between">
+          <span class="font-mono text-xs tracking-wider text-glass-sage uppercase">
+            {slide.tag}
+          </span>
+        </div>
+
+        <!-- Bottom Content Bar -->
+        <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-6 pb-6">
+          <!-- Left: Title & CTA -->
+          <div class="max-w-2xl pointer-events-auto">
+            <p class="font-mono text-xs sm:text-sm text-glass-sage mb-2">
+              {slide.subtitle}
+            </p>
+            <h2 class="font-display text-3xl sm:text-5xl lg:text-6xl text-lab-50 leading-[1.08]">
+              {slide.title}
+            </h2>
+
+            {slide.ctaHref && (
+              <div class="mt-5 flex items-center gap-4">
+                <a
+                  href={slide.ctaHref}
+                  class="inline-flex items-center gap-2 font-body text-xs sm:text-sm bg-lab-50 text-graphite-950 px-5 py-2.5 font-medium hover:bg-pigment-red hover:text-white transition-colors"
+                >
+                  {slide.ctaText}
+                </a>
+              </div>
+            )}
+          </div>
+
+          <!-- Right: Technical / Studio Metadata -->
+          <div class="text-left sm:text-right font-mono text-xs text-lab-50/70 space-y-1">
+            <p class="text-lab-50 font-medium tracking-wider">{slide.metaRight}</p>
+            <p class="text-glass-sage text-[11px]">{slide.metaSub}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  ))}
+
+  <!-- Click zones for next / prev on desktop (Split Screen) -->
+  <div
+    id="click-zone-prev"
+    class="hidden md:block absolute inset-y-0 left-0 w-1/4 z-20 cursor-w-resize"
+    aria-label="Slide anterior"
+  ></div>
+  <div
+    id="click-zone-next"
+    class="hidden md:block absolute inset-y-0 right-0 w-1/4 z-20 cursor-e-resize"
+    aria-label="Próximo slide"
+  ></div>
+
+  <!-- Bottom Interactive Slide Controls & Progress -->
+  <div class="absolute bottom-4 inset-x-6 sm:inset-x-10 z-30 flex items-center justify-between pointer-events-none">
+    <!-- Progress Indicator -->
+    <div class="flex items-center gap-3 pointer-events-auto">
+      <span id="slide-current" class="font-mono text-xs text-lab-50 font-medium">01</span>
+      <div class="w-20 sm:w-32 h-[2px] bg-white/20 relative overflow-hidden">
+        <div id="slide-progress-bar" class="absolute top-0 bottom-0 left-0 bg-pigment-red transition-all duration-500 w-[20%]"></div>
+      </div>
+      <span class="font-mono text-xs text-white/40">0{slides.length}</span>
+    </div>
+
+    <!-- Navigation Buttons -->
+    <div class="flex items-center gap-2 pointer-events-auto">
+      <button
+        id="btn-slide-prev"
+        type="button"
+        class="w-9 h-9 flex items-center justify-center border border-white/20 text-lab-50 hover:border-white hover:bg-white/10 transition-colors"
+        aria-label="Slide anterior"
+      >
+        ←
+      </button>
+      <button
+        id="btn-slide-next"
+        type="button"
+        class="w-9 h-9 flex items-center justify-center border border-white/20 text-lab-50 hover:border-white hover:bg-white/10 transition-colors"
+        aria-label="Próximo slide"
+      >
+        →
+      </button>
+    </div>
+  </div>
+</section>
+
+<script>
+  let currentSlide = 0;
+  const slides = document.querySelectorAll<HTMLElement>('.slide-item');
+  const totalSlides = slides.length;
+  const currentLabel = document.getElementById('slide-current');
+  const progressBar = document.getElementById('slide-progress-bar');
+  const btnPrev = document.getElementById('btn-slide-prev');
+  const btnNext = document.getElementById('btn-slide-next');
+  const zonePrev = document.getElementById('click-zone-prev');
+  const zoneNext = document.getElementById('click-zone-next');
+
+  // Áudio global
+  let isMuted = true;
+
+  function updateSlide(newIndex: number) {
+    if (newIndex < 0) newIndex = totalSlides - 1;
+    if (newIndex >= totalSlides) newIndex = 0;
+
+    slides.forEach((slide, idx) => {
+      const video = slide.querySelector<HTMLVideoElement>('video');
+      if (idx === newIndex) {
+        slide.classList.remove('is-hidden');
+        slide.classList.add('is-active');
+        if (video) {
+          video.currentTime = 0;
+          video.play().catch(() => {});
+          video.muted = isMuted;
+        }
+      } else {
+        slide.classList.remove('is-active');
+        slide.classList.add('is-hidden');
+        if (video) {
+          video.pause();
+        }
+      }
+    });
+
+    currentSlide = newIndex;
+    if (currentLabel) {
+      currentLabel.textContent = `0${currentSlide + 1}`;
+    }
+    if (progressBar) {
+      progressBar.style.width = `${((currentSlide + 1) / totalSlides) * 100}%`;
+    }
+
+    // Dispara evento para o header atualizar indicador se necessário
+    window.dispatchEvent(new CustomEvent('slidechange', { detail: { index: currentSlide, total: totalSlides } }));
+  }
+
+  btnNext?.addEventListener('click', () => updateSlide(currentSlide + 1));
+  btnPrev?.addEventListener('click', () => updateSlide(currentSlide - 1));
+  zoneNext?.addEventListener('click', () => updateSlide(currentSlide + 1));
+  zonePrev?.addEventListener('click', () => updateSlide(currentSlide - 1));
+
+  // Teclado
+  window.addEventListener('keydown', (e) => {
+    if (e.key === 'ArrowRight' || e.key === ' ') {
+      updateSlide(currentSlide + 1);
+    } else if (e.key === 'ArrowLeft') {
+      updateSlide(currentSlide - 1);
+    }
+  });
+
+  // Ouvinte de áudio global
+  window.addEventListener('soundtoggle', ((e: CustomEvent<{ muted: boolean }>) => {
+    isMuted = e.detail.muted;
+    const activeVideo = slides[currentSlide]?.querySelector<HTMLVideoElement>('video');
+    if (activeVideo) {
+      activeVideo.muted = isMuted;
+    }
+  }) as EventListener);
+</script>

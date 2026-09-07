@@ -1,31 +1,36 @@
 /* Newsreader = register "arte" (serifa editorial, usar sempre em itálico no display) */
 /* Jost = wordmark (geométrica leve, mesma família visual do logotipo oficial) */
 /* IBM Plex Mono = register "laboratório" (specs, método, lote) */
-@import url('https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@1,14..32,400;1,14..32,500&family=Jost:wght@400;500&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@1,14..32,300;1,14..32,400;1,14..32,500;1,14..32,600&family=Jost:wght@300;400;500;600&family=Inter:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap');
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 :root {
-  /* ver DESIGN.md §1 — não adicionar cor nova sem atualizar o DESIGN.md primeiro */
-  --graphite-950: #1b1b1b;
-  --graphite-700: #3a3a38;
+  /* ver DESIGN.md §1 — sistema de cor calibrado */
+  --graphite-950: #121212;
+  --graphite-900: #1a1a1a;
+  --graphite-700: #2e2e2c;
+  --graphite-500: #555552;
   --lab-50: #f7f5f2;
-  --glassline: #d7ded8;
+  --glassline: rgba(255, 255, 255, 0.12);
+  --glassline-dark: rgba(18, 18, 18, 0.12);
   --glass-sage: #7c9683;
-  --pigment-red: #761520; /* cor real da arte oficial — único acento quente, preço/CTA, nunca decoração */
+  --pigment-red: #761520; /* cor real da arte oficial — acento quente */
 }
 
 html {
   scroll-behavior: smooth;
+  background-color: var(--graphite-950);
 }
 
 body {
-  @apply bg-lab-50 text-graphite-950 font-body antialiased;
+  @apply bg-graphite-950 text-lab-50 font-body antialiased selection:bg-pigment-red selection:text-white;
+  overflow-x: hidden;
 }
 
-/* foco visível sempre — WCAG, público inclui uso em ambiente de estúdio/luva */
+/* Foco visível WCAG */
 :focus-visible {
   outline: 2px solid var(--glass-sage);
   outline-offset: 2px;
@@ -40,12 +45,60 @@ body {
   }
 }
 
-/* register "arte" — usar font-display sempre em itálico (é a assinatura tipográfica
-   da dualidade ciência x arte, não um detalhe opcional) */
+/* Registro "arte" — Newsreader sempre em itálico */
 .font-display {
+  font-family: 'Newsreader', serif;
   font-style: italic;
 }
 
 .price {
   color: var(--pigment-red);
 }
+
+/* Animação do equalizador de áudio no header */
+@keyframes sound-bar-1 {
+  0%, 100% { height: 4px; }
+  50% { height: 14px; }
+}
+
+@keyframes sound-bar-2 {
+  0%, 100% { height: 12px; }
+  50% { height: 5px; }
+}
+
+@keyframes sound-bar-3 {
+  0%, 100% { height: 6px; }
+  50% { height: 16px; }
+}
+
+.animate-sound-1 {
+  animation: sound-bar-1 0.8s ease-in-out infinite;
+}
+
+.animate-sound-2 {
+  animation: sound-bar-2 0.6s ease-in-out infinite 0.2s;
+}
+
+.animate-sound-3 {
+  animation: sound-bar-3 0.9s ease-in-out infinite 0.1s;
+}
+
+/* Transições fluidas de slides */
+.slide-item {
+  transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1), transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.slide-item.is-active {
+  opacity: 1;
+  pointer-events: auto;
+  transform: scale(1);
+  z-index: 10;
+}
+
+.slide-item.is-hidden {
+  opacity: 0;
+  pointer-events: none;
+  transform: scale(1.03);
+  z-index: 0;
+}
+

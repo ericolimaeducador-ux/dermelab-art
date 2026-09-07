@@ -4,17 +4,47 @@ import Wordmark from './Wordmark.astro';
 const year = new Date().getFullYear();
 ---
 
-<footer class="bg-graphite-950 text-lab-50 px-6 py-12">
-  <div class="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-8">
+<footer class="bg-graphite-950 text-lab-50 px-6 sm:px-12 py-20 border-t border-white/10">
+  <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-start md:items-end justify-between gap-12">
     <div>
       <Wordmark size="lg" />
-      <p class="font-display text-lg mt-3 max-w-xs">{site.tagline}</p>
+      <p class="font-display text-xl sm:text-2xl mt-4 max-w-sm text-white/90">
+        {site.tagline}
+      </p>
+      <p class="font-mono text-xs text-glass-sage mt-2">
+        A ciência do cuidado, a majestade da sua arte.
+      </p>
     </div>
-    <ul class="font-body text-sm space-y-1 text-glassline">
-      <li><a href={`mailto:${site.email}`} class="hover:text-lab-50">{site.email}</a></li>
-      <li><a href={site.instagram} class="hover:text-lab-50" target="_blank" rel="noreferrer">Instagram</a></li>
-      <li><a href={site.whatsapp} class="hover:text-lab-50" target="_blank" rel="noreferrer">WhatsApp — atacado</a></li>
-    </ul>
+
+    <div class="grid grid-cols-2 sm:grid-cols-3 gap-8 font-mono text-xs">
+      <div>
+        <p class="text-white/40 uppercase mb-3">Navegação</p>
+        <ul class="space-y-2 text-white/80 font-body text-sm">
+          <li><a href="/loja" class="hover:text-white transition-colors">Loja / Catálogo</a></li>
+          <li><a href="/sobre" class="hover:text-white transition-colors">Sobre</a></li>
+          <li><a href="/contato" class="hover:text-white transition-colors">Contato</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <p class="text-white/40 uppercase mb-3">Contato & Redes</p>
+        <ul class="space-y-2 text-white/80 font-body text-sm">
+          <li><a href={site.whatsapp} target="_blank" rel="noopener" class="hover:text-white transition-colors">WhatsApp</a></li>
+          <li><a href={site.instagram} target="_blank" rel="noopener" class="hover:text-white transition-colors">Instagram</a></li>
+          <li><a href={`mailto:${site.email}`} class="hover:text-white transition-colors">E-mail</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <p class="text-white/40 uppercase mb-3">Laboratório</p>
+        <p class="text-white/70">Linha de Cuidado Dérmico & Cicatrização</p>
+        <p class="text-glass-sage mt-1">Status: Ativo</p>
+      </div>
+    </div>
   </div>
-  <p class="font-mono text-xs text-graphite-700 mt-10">© {year} {site.fullName}</p>
+
+  <div class="max-w-7xl mx-auto mt-16 pt-8 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between text-xs font-mono text-white/40 gap-4">
+    <p>© {year} {site.fullName}. Todos os direitos reservados.</p>
+    <p class="text-center sm:text-right">Dermelab · Art Studio — Curadoria & Assepsia</p>
+  </div>
 </footer>

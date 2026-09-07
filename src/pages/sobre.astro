@@ -3,14 +3,43 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import site from '../data/site.json';
 ---
 
-<BaseLayout title="Sobre">
-  <section class="pt-24 px-6 max-w-prose mx-auto">
-    <h1 class="font-display text-4xl mb-6">Sobre a {site.fullName}</h1>
-    <p class="font-body text-base leading-relaxed">
-      <!-- TODO(copy): manifesto real da marca — quem fabrica/distribui, critério de curadoria
-           de fornecedores, compromisso com material esterilizado/homologado. Não publicar
-           claim de segurança ou procedência sem confirmação. -->
-      [PENDENTE — texto institucional a definir com o Erico]
-    </p>
-  </section>
+<BaseLayout title="Sobre a Dermelab · Art" description="Manifesto e autoridade científica da marca.">
+  <div class="bg-graphite-950 min-h-screen text-lab-50 pt-28 pb-24 px-6 sm:px-12">
+    <div class="max-w-4xl mx-auto space-y-12">
+      <div class="border-b border-white/10 pb-8">
+        <p class="font-mono text-xs text-glass-sage uppercase tracking-widest mb-2">Manifesto</p>
+        <h1 class="font-display text-4xl sm:text-6xl">{site.fullName}</h1>
+        <p class="font-display text-2xl sm:text-3xl text-white/80 mt-4 italic">
+          "{site.tagline}"
+        </p>
+      </div>
+
+      <div class="space-y-8 font-body text-base sm:text-lg text-white/80 leading-relaxed">
+        <p>
+          A <strong class="text-white">Dermelab · Art</strong> existe na fronteira exata entre o rigor do laboratório e a expressão máxima da tatuagem. Desenvolvemos formulações e protocolos de assepsia e cicatrização para que a arte sobre a pele permaneça viva, nítida e protegida.
+        </p>
+        <p>
+          Entendemos a pele como um tecido vivo que passa por uma janela inflamatória delicada. Cada produto é formulado com ativos biocompatíveis de alta absorção que reforçam a barreira cutânea e preservam a integridade do pigmento.
+        </p>
+      </div>
+
+      <div class="grid sm:grid-cols-3 gap-6 pt-10 border-t border-white/10">
+        <div class="p-6 bg-graphite-900 border border-white/10 space-y-2">
+          <p class="font-mono text-xs text-glass-sage">01</p>
+          <h3 class="font-display text-xl">Ciência Aplicada</h3>
+          <p class="font-body text-xs text-white/60">Foco estrito na fisiologia da cicatrização dérmica.</p>
+        </div>
+        <div class="p-6 bg-graphite-900 border border-white/10 space-y-2">
+          <p class="font-mono text-xs text-glass-sage">02</p>
+          <h3 class="font-display text-xl">Alta Assepsia</h3>
+          <p class="font-body text-xs text-white/60">Controle microbiológico e respeito ao estúdio.</p>
+        </div>
+        <div class="p-6 bg-graphite-900 border border-white/10 space-y-2">
+          <p class="font-mono text-xs text-glass-sage">03</p>
+          <h3 class="font-display text-xl">A Serviço da Arte</h3>
+          <p class="font-body text-xs text-white/60">O cuidado existe para elevar o trabalho do tatuador.</p>
+        </div>
+      </div>
+    </div>
+  </div>
 </BaseLayout>

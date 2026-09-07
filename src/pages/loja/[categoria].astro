@@ -4,9 +4,6 @@ import ProductCard from '../../components/ProductCard.astro';
 import categoriesData from '../../data/categories.json';
 import productsData from '../../data/products.sample.json';
 
-// Catálogo filtrado por categoria (CLAUDE.md backlog item 5). Rota estática:
-// uma página por categoria de categories.json. Filtro client-side em /loja
-// continua no backlog — aqui é navegação direta por URL.
 export function getStaticPaths() {
   return categoriesData.items.map((cat) => ({
     params: { categoria: cat.slug },
@@ -21,51 +18,67 @@ const { category, products } = Astro.props;
 const categories = categoriesData.items;
 ---
 
-<BaseLayout title={category.name} description={`Catálogo — ${category.name}`}>
-  <section class="pt-24 px-6">
-    <p class="font-mono text-sm text-glass-sage mb-2">Categoria</p>
-    <h1 class="font-display text-4xl">{category.name}</h1>
-
-    <nav class="flex flex-wrap gap-3 mt-6 mb-10 font-body text-sm">
-      <a
-        href="/loja"
-        class="border border-graphite-700/30 px-3 py-1 hover:border-glass-sage hover:text-glass-sage transition-colors"
-      >
-        Todos
-      </a>
-      {categories.map((cat) => (
-        <a
-          href={`/loja/${cat.slug}`}
-          class:list={[
-            'border px-3 py-1 transition-colors',
-            cat.slug === category.slug
-              ? 'border-glass-sage text-glass-sage'
-              : 'border-graphite-700/30 hover:border-glass-sage hover:text-glass-sage',
-          ]}
-        >
-          {cat.name}
+<BaseLayout title={`Catálogo — ${category.name}`} description={`Linha de produtos — ${category.name}`}>
+  <div class="bg-graphite-950 min-h-screen text-lab-50 pt-28 pb-20 px-6 sm:px-12">
+    <div class="max-w-7xl mx-auto">
+      <!-- Header da Categoria -->
+      <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 pb-8 border-b border-white/10">
+        <div>
+          <p class="font-mono text-xs text-glass-sage uppercase tracking-widest mb-2">Categoria</p>
+          <h1 class="font-display text-4xl sm:text-6xl">{category.name}</h1>
+        </div>
+        <a href="/loja" class="font-mono text-xs text-glass-sage hover:text-white transition-colors">
+          ← Voltar para todos os produtos
         </a>
-      ))}
-    </nav>
-  </section>
+      </div>
 
-  {products.length > 0 ? (
-    <section class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-1 bg-graphite-950">
-      {products.map((p) => (
-        <ProductCard
-          slug={p.slug}
-          name={p.name}
-          price={p.price}
-          currency={p.currency}
-          image={p.image}
-        />
-      ))}
-    </section>
-  ) : (
-    <section class="px-6 pb-24">
-      <p class="font-mono text-sm text-graphite-700/70">
-        Nenhum produto nesta categoria ainda — em breve.
-      </p>
-    </section>
-  )}
+      <!-- Filtros por Categoria -->
+      <nav class="flex flex-wrap items-center gap-2 sm:gap-3 my-8 font-mono text-xs">
+        <a
+          href="/loja"
+          class="px-4 py-2 border border-white/20 text-white/80 hover:border-white hover:text-white transition-colors"
+        >
+          Todos
+        </a>
+        {categories.map((cat) => (
+          <a
+            href={`/loja/${cat.slug}`}
+            class:list={[
+              'px-4 py-2 transition-colors',
+              cat.slug === category.slug
+                ? 'bg-white text-graphite-950 font-medium'
+                : 'border border-white/20 text-white/80 hover:border-white hover:text-white',
+            ]}
+          >
+            {cat.name}
+          </a>
+        ))}
+      </nav>
+
+      <!-- Lista de Produtos -->
+      {products.length > 0 ? (
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 mt-10">
+          {products.map((p, idx) => (
+            <ProductCard
+              slug={p.slug}
+              name={p.name}
+              price={p.price}
+              currency={p.currency}
+              image={p.image}
+              portrait={idx % 2 === 1}
+            />
+          ))}
+        </div>
+      ) : (
+        <div class="py-24 text-center border border-white/10 mt-10">
+          <p class="font-mono text-sm text-white/60">
+            Nenhum produto cadastrado nesta categoria no momento — em breve.
+          </p>
+          <a href="/loja" class="mt-4 inline-block font-body text-xs text-glass-sage hover:underline">
+            Explorar catálogo completo →
+          </a>
+        </div>
+      )}
+    </div>
+  </div>
 </BaseLayout>

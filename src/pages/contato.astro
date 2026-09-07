@@ -3,17 +3,48 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import site from '../data/site.json';
 ---
 
-<BaseLayout title="Contato">
-  <section class="pt-24 px-6 max-w-prose mx-auto">
-    <h1 class="font-display text-4xl mb-6">Contato & atacado</h1>
-    <p class="font-body text-base leading-relaxed mb-8">
-      Estúdios e lojistas: fale com o time comercial para tabela de atacado e amostras.
-    </p>
-    <ul class="font-body text-base space-y-2">
-      <li>E-mail: <a href={`mailto:${site.email}`} class="underline">{site.email}</a></li>
-      <li>WhatsApp: <a href={site.whatsapp} class="underline">{site.whatsapp}</a></li>
-    </ul>
-    <!-- TODO(feature): formulário de lead B2B com validação (Zod) — mesmo padrão usado
-         no ContactForm do projeto SWB do Erico. -->
-  </section>
+<BaseLayout title="Contato & Atacado" description="Atendimento comercial, parcerias e atacado para estúdios de tatuagem.">
+  <div class="bg-graphite-950 min-h-screen text-lab-50 pt-28 pb-24 px-6 sm:px-12">
+    <div class="max-w-4xl mx-auto space-y-12">
+      <div class="border-b border-white/10 pb-8">
+        <p class="font-mono text-xs text-glass-sage uppercase tracking-widest mb-2">Comercial & Estúdios</p>
+        <h1 class="font-display text-4xl sm:text-6xl">Contato & Atacado</h1>
+        <p class="font-body text-base text-white/70 mt-4 max-w-xl">
+          Condições especiais de fornecimento para estúdios profissionais de tatuagem, artistas e distribuidores.
+        </p>
+      </div>
+
+      <div class="grid sm:grid-cols-2 gap-8 font-body">
+        <div class="p-8 bg-graphite-900 border border-white/10 space-y-4">
+          <span class="font-mono text-xs text-glass-sage uppercase tracking-wider block">Atendimento Rápido</span>
+          <h2 class="font-display text-2xl">WhatsApp Comercial</h2>
+          <p class="text-sm text-white/60">
+            Fale diretamente com nossa equipe para cotações em volume, prazos e envio de amostras.
+          </p>
+          <a
+            href={site.whatsapp}
+            target="_blank"
+            rel="noopener"
+            class="inline-block bg-white text-graphite-950 px-6 py-3 text-sm font-medium hover:bg-glass-sage hover:text-white transition-colors"
+          >
+            Iniciar Conversa no WhatsApp →
+          </a>
+        </div>
+
+        <div class="p-8 bg-graphite-900 border border-white/10 space-y-4">
+          <span class="font-mono text-xs text-glass-sage uppercase tracking-wider block">Correspondência Direta</span>
+          <h2 class="font-display text-2xl">E-mail Institucional</h2>
+          <p class="text-sm text-white/60">
+            Envie propostas de parceria, eventos, patrocínio ou dúvidas técnicas de produto.
+          </p>
+          <a
+            href={`mailto:${site.email}`}
+            class="inline-block border border-white/20 text-white px-6 py-3 text-sm font-medium hover:border-white transition-colors"
+          >
+            {site.email} →
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
 </BaseLayout>

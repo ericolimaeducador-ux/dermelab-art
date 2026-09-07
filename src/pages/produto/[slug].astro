@@ -19,42 +19,61 @@ const formattedPrice = new Intl.NumberFormat('pt-BR', {
 ---
 
 <BaseLayout title={product.name} description={product.shortDescription}>
-  <section class="pt-24 px-6 grid gap-10 lg:grid-cols-2 lg:gap-16 max-w-6xl mx-auto">
-    <!-- Coluna de imagem — sticky no desktop (mesma lógica de scroll-telling do PDP do OmniaCare) -->
-    <div class="lg:sticky lg:top-24 h-fit">
-      <img
-        src={product.image}
-        alt={product.name}
-        class="w-full aspect-[4/3] object-cover bg-graphite-700"
-      />
+  <div class="bg-graphite-950 min-h-screen text-lab-50 pt-28 pb-20 px-6 sm:px-12">
+    <div class="max-w-7xl mx-auto">
+      <nav class="mb-8 font-mono text-xs text-glass-sage">
+        <a href="/loja" class="hover:text-white transition-colors">← Voltar para a Loja</a>
+      </nav>
+
+      <section class="grid gap-12 lg:grid-cols-12 lg:gap-16 items-start">
+        <!-- Coluna de imagem — sticky no desktop (scroll-telling) -->
+        <div class="lg:col-span-7 lg:sticky lg:top-28">
+          <div class="relative aspect-[4/3] w-full bg-graphite-900 border border-white/10 overflow-hidden">
+            <img
+              src={product.image}
+              alt={product.name}
+              class="w-full h-full object-cover"
+            />
+          </div>
+        </div>
+
+        <!-- Coluna de informações e specs -->
+        <div class="lg:col-span-5 space-y-8">
+          <div>
+            <span class="font-mono text-xs text-glass-sage uppercase tracking-widest block mb-2">
+              DERMELAB · ART
+            </span>
+            <h1 class="font-display text-4xl sm:text-5xl leading-tight">{product.name}</h1>
+            <p class="price font-mono text-xl sm:text-2xl mt-4 font-medium">
+              {product.price > 0 ? formattedPrice : 'Sob consulta — atacado & estúdios'}
+            </p>
+          </div>
+
+          <p class="font-body text-sm sm:text-base text-white/70 leading-relaxed max-w-prose">
+            {product.shortDescription}
+          </p>
+
+          <div>
+            <a
+              href="/contato"
+              class="inline-block w-full text-center font-body text-sm font-medium bg-pigment-red text-white px-6 py-4 hover:opacity-90 transition-opacity"
+            >
+              Consultar Disponibilidade & Preços
+            </a>
+          </div>
+
+          <div class="pt-8 border-t border-white/10">
+            <h2 class="font-display text-2xl mb-4">Especificações Técnicas</h2>
+            <SpecTable specs={product.specs} />
+
+            {product.regulatory === null && (
+              <p class="font-mono text-xs text-white/40 mt-6">
+                [PENDENTE — registro sanitário/procedência a confirmar antes da publicação]
+              </p>
+            )}
+          </div>
+        </div>
+      </section>
     </div>
-
-    <div>
-      <h1 class="font-display text-4xl">{product.name}</h1>
-      <p class="price font-mono text-2xl mt-3">
-        {product.price > 0 ? formattedPrice : 'Sob consulta — fale com o time comercial'}
-      </p>
-      <p class="font-body text-base text-graphite-700/80 mt-4 max-w-prose">
-        {product.shortDescription}
-      </p>
-
-      <!-- Sem carrinho/checkout ainda (ver CLAUDE.md backlog 1–2). Até lá o CTA
-           encaminha para o time comercial — coerente com o preço "sob consulta". -->
-      <a
-        href="/contato"
-        class="mt-8 inline-block w-full sm:w-auto text-center font-body text-sm bg-graphite-950 text-lab-50 px-6 py-3 hover:bg-pigment-red transition-colors"
-      >
-        Consultar com o time comercial
-      </a>
-
-      <h2 class="font-display text-xl mt-12 mb-3">Especificações</h2>
-      <SpecTable specs={product.specs} />
-
-      {product.regulatory === null && (
-        <p class="font-mono text-xs text-graphite-700/60 mt-4">
-          [PENDENTE — registro sanitário/procedência a confirmar antes da publicação]
-        </p>
-      )}
-    </div>
-  </section>
+  </div>
 </BaseLayout>

@@ -1,16 +1,29 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import Hero from '../components/Hero.astro';
-import ScienceRevealSection from '../components/ScienceRevealSection.astro';
+import SlideShow from '../components/SlideShow.astro';
 import MethodSection from '../components/MethodSection.astro';
 import CategoryIndex from '../components/CategoryIndex.astro';
 import ProductWall from '../components/ProductWall.astro';
 ---
 
 <BaseLayout title="Home">
-  <Hero />
-  <ScienceRevealSection />
+  <!-- Immersive Full-Bleed Interactive SlideShow Engine (Padrão Smorgasbord Studio) -->
+  <SlideShow />
+
+  <!-- Continuous Editorial Sections -->
   <MethodSection />
   <CategoryIndex />
-  <ProductWall />
+  
+  <section class="bg-graphite-950 px-6 sm:px-12 pt-20 pb-8 border-t border-white/10">
+    <div class="max-w-7xl mx-auto flex items-baseline justify-between mb-8">
+      <div>
+        <p class="font-mono text-xs text-glass-sage uppercase tracking-widest mb-2">Galeria Visual</p>
+        <h2 class="font-display text-3xl sm:text-4xl text-lab-50">Produtos & Arte Dérmica</h2>
+      </div>
+      <a href="/loja" class="font-mono text-xs text-glass-sage hover:text-white transition-colors">
+        Ver Loja Completa →
+      </a>
+    </div>
+    <ProductWall />
+  </section>
 </BaseLayout>

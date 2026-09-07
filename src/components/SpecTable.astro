@@ -11,12 +11,12 @@ interface Props {
 const { specs } = Astro.props;
 ---
 
-<table class="w-full font-mono text-sm">
+<table class="w-full font-mono text-xs sm:text-sm">
   <tbody>
     {specs.map((spec) => (
-      <tr class="border-t border-glassline">
-        <th class="py-2 pr-4 text-left font-normal text-graphite-700/70 w-1/3">{spec.label}</th>
-        <td class="py-2 text-graphite-950">{spec.value}</td>
+      <tr class="border-t border-white/10">
+        <th class="py-3 pr-4 text-left font-normal text-white/50 w-1/3">{spec.label}</th>
+        <td class="py-3 text-lab-50">{spec.value}</td>
       </tr>
     ))}
   </tbody>

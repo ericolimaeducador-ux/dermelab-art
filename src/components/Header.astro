@@ -2,26 +2,45 @@
 import Wordmark from './Wordmark.astro';
 ---
 
-<header class="fixed top-0 left-0 right-0 z-40 flex items-center justify-between px-6 py-4 bg-graphite-950/85 backdrop-blur-sm text-lab-50">
-  <a href="/" aria-label="Dermelab · Art — início">
+<header class="fixed top-0 left-0 right-0 z-40 flex items-center justify-between px-6 sm:px-10 py-5 bg-gradient-to-b from-graphite-950/90 via-graphite-950/40 to-transparent backdrop-blur-[2px] text-lab-50">
+  <!-- Brand Wordmark -->
+  <a href="/" class="group flex items-center gap-2" aria-label="Dermelab · Art — início">
     <Wordmark />
   </a>
 
-  <!-- Carrinho/checkout ainda não implementado (ver CLAUDE.md backlog 1–2).
-       Enquanto isso o header não exibe link de carrinho — a conversão passa
-       pelo time comercial (CTA nas páginas de produto). -->
-  <button
-    id="menu-toggle"
-    type="button"
-    class="font-body text-sm flex items-center gap-2"
-    aria-expanded="false"
-    aria-controls="menu-overlay"
-  >
-    <span id="menu-toggle-label">Menu</span>
-  </button>
+  <!-- Right Actions: Sound Toggle + Menu / Index -->
+  <div class="flex items-center gap-6 sm:gap-8">
+    <!-- Sound Toggle -->
+    <button
+      id="sound-toggle-btn"
+      type="button"
+      class="group flex items-center gap-2 font-mono text-xs text-lab-50/80 hover:text-lab-50 transition-colors"
+      aria-pressed="false"
+      aria-label="Alternar áudio de fundo"
+    >
+      <span class="flex items-end gap-[2px] h-3.5 w-3.5 py-[1px]">
+        <span id="sound-bar-1" class="w-[2px] h-1 bg-lab-50/60 rounded-full transition-all"></span>
+        <span id="sound-bar-2" class="w-[2px] h-2.5 bg-lab-50/60 rounded-full transition-all"></span>
+        <span id="sound-bar-3" class="w-[2px] h-1.5 bg-lab-50/60 rounded-full transition-all"></span>
+      </span>
+      <span id="sound-label" class="hidden sm:inline">Sound: OFF</span>
+    </button>
+
+    <!-- Index / Menu Toggle -->
+    <button
+      id="menu-toggle"
+      type="button"
+      class="font-body text-xs sm:text-sm uppercase tracking-wider px-3.5 py-1.5 border border-white/20 hover:border-white hover:bg-white/10 transition-colors"
+      aria-expanded="false"
+      aria-controls="menu-overlay"
+    >
+      <span id="menu-toggle-label">Index</span>
+    </button>
+  </div>
 </header>
 
 <script>
+  // Menu Overlay Toggle
   const toggle = document.getElementById('menu-toggle');
   const label = document.getElementById('menu-toggle-label');
   const overlay = document.getElementById('menu-overlay');
@@ -29,7 +48,36 @@ import Wordmark from './Wordmark.astro';
   toggle?.addEventListener('click', () => {
     const isOpen = overlay?.classList.toggle('is-open');
     toggle.setAttribute('aria-expanded', String(!!isOpen));
-    if (label) label.textContent = isOpen ? 'Fechar' : 'Menu';
+    if (label) label.textContent = isOpen ? 'Close' : 'Index';
     document.body.classList.toggle('overflow-hidden', !!isOpen);
+  });
+
+  // Sound Toggle Control
+  const soundBtn = document.getElementById('sound-toggle-btn');
+  const soundLabel = document.getElementById('sound-label');
+  const bar1 = document.getElementById('sound-bar-1');
+  const bar2 = document.getElementById('sound-bar-2');
+  const bar3 = document.getElementById('sound-bar-3');
+  let soundMuted = true;
+
+  soundBtn?.addEventListener('click', () => {
+    soundMuted = !soundMuted;
+    soundBtn.setAttribute('aria-pressed', String(!soundMuted));
+
+    if (soundLabel) {
+      soundLabel.textContent = soundMuted ? 'Sound: OFF' : 'Sound: ON';
+    }
+
+    if (!soundMuted) {
+      bar1?.classList.add('animate-sound-1');
+      bar2?.classList.add('animate-sound-2');
+      bar3?.classList.add('animate-sound-3');
+    } else {
+      bar1?.classList.remove('animate-sound-1');
+      bar2?.classList.remove('animate-sound-2');
+      bar3?.classList.remove('animate-sound-3');
+    }
+
+    window.dispatchEvent(new CustomEvent('soundtoggle', { detail: { muted: soundMuted } }));
   });
 </script>
